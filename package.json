@@ -1,0 +1,33 @@
+{
+  "name": "ng-d3-asset",
+  "version": "1.1.0",
+  "description": "Simple chart d3 library",
+  "main": "dist/ng-d3-asset.bundle.js",
+  "scripts": {
+    "build:production": "webpack --config ./config/webpack.config.js --env=production",
+    "build:development": "webpack --config ./config/webpack.config.js --env=development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/falizyer/ng-d3-asset.git"
+  },
+  "author": "Dzmitry Hrachou",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/falizyer/ng-d3-asset/issues"
+  },
+  "homepage": "https://github.com/falizyer/ng-d3-asset#readme",
+  "devDependencies": {
+    "path": "0.12.7",
+    "ts-loader": "4.0.1",
+    "tslint": "5.9.1",
+    "tslint-loader": "3.6.0",
+    "typescript": "2.7.2",
+    "webpack": "2.7.0",
+    "yargs": "^11.0.0"
+  },
+  "dependencies": {
+    "angular": "1.6.9"
+  }
+}
