@@ -16,11 +16,16 @@ const config = {
             alias: defaultConfig.webpack.alias
         },
         entry: {
-            "ng-d3-asset": "./src/component/index.ts"
+            "ng-d3-asset": ["./src/index.ts"]
         },
         module: {
-            rules: []
-        }
+            rules: [
+                ...defaultConfig.webpack.module.rules
+            ]
+        },
+        plugins: [
+            ...defaultConfig.webpack.plugins
+        ]
     }
 };
 

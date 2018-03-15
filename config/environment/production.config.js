@@ -1,5 +1,6 @@
 const path = require("path");
 const defaultConfig = require("../default.config");
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
     webpack: {
@@ -19,8 +20,17 @@ const config = {
             "ng-d3-asset": "./src/component/index.ts"
         },
         module: {
-            rules: []
-        }
+            rules: [
+                ...defaultConfig.webpack.module.rules
+            ]
+        },
+        plugins: [
+            ...defaultConfig.webpack.plugins,
+            new UglifyJSPlugin({
+                sourceMap: true,
+                exclude: /\.min\.js/
+            })
+        ]
     }
 };
 

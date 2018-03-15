@@ -1,3 +1,8 @@
 import {module} from "angular";
 
-export default module("ng-d3-asset", []).name;
+import lineChartModule from "./line-chart/index";
+
+export default module("ng-d3-asset.component",
+    [
+        lineChartModule
+    ]).name;
