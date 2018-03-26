@@ -8,7 +8,10 @@ export class LineChartComponent {
 
     public static get $component() {
         return {
-            bindings: {},
+            bindings: {
+                metadata: "<",
+                data: "<"
+            },
             controller: LineChartComponent,
             template: require("./line-chart.tpl.html")
         };

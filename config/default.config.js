@@ -1,6 +1,7 @@
 const path = require("path");
 const {argv} = require("yargs");
 const {DefinePlugin} = require("webpack");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const config = {
     root: path.resolve(__dirname, "../"),
@@ -34,6 +35,11 @@ const config = {
             }]
         },
         plugins: [
+            new CleanWebpackPlugin([
+                "./dist"
+            ], {
+                root: path.resolve(__dirname, "../")
+            }),
             new DefinePlugin({
                 "process.env": {
                     NODE_ENV: JSON.stringify(argv.env || "production")

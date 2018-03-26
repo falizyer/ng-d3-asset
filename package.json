@@ -1,8 +1,8 @@
 {
   "name": "ng-d3-asset",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Simple chart d3 library",
-  "main": "dist/ng-d3-asset.bundle.js",
+  "main": "dist/ng-d3-asset.min.js",
   "scripts": {
     "build:production": "webpack --config ./config/webpack.config.js --env=production",
     "build:development": "webpack --config ./config/webpack.config.js --env=development",
@@ -23,8 +23,10 @@
   "homepage": "https://github.com/falizyer/ng-d3-asset#readme",
   "devDependencies": {
     "@types/node": "^9.4.7",
+    "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.26.0",
     "html-loader": "0.4.4",
+    "html-webpack-plugin": "^3.1.0",
     "less": "^2.7.3",
     "less-loader": "^2.2.3",
     "path": "0.12.7",
@@ -37,6 +39,7 @@
     "yargs": "11.0.0"
   },
   "dependencies": {
+    "@types/jquery": "^3.3.1",
     "angular": "1.6.9"
   }
 }

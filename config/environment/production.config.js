@@ -8,8 +8,8 @@ const config = {
         devtool: "source-map",
         output: {
             path: path.resolve(defaultConfig.root, defaultConfig.build),
-            filename: "[name].bundle.js",
-            chunkFilename: "[id].bundle.js"
+            filename: "[name].min.js",
+            chunkFilename: "[id].min.js"
         },
         resolve: {
             modules: ["node_modules", `${path.resolve(defaultConfig.root, defaultConfig.source)}`],

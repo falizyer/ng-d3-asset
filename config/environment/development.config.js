@@ -1,5 +1,6 @@
 const path = require("path");
 const defaultConfig = require("../default.config");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const config = {
     webpack: {
@@ -24,7 +25,11 @@ const config = {
             ]
         },
         plugins: [
-            ...defaultConfig.webpack.plugins
+            ...defaultConfig.webpack.plugins,
+            new HtmlWebpackPlugin({
+                template: "./src/example.ejs",
+                filename: "index.html"
+            })
         ]
     }
 };
