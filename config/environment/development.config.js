@@ -17,7 +17,7 @@ const config = {
             alias: defaultConfig.webpack.alias
         },
         entry: {
-            "ng-d3-asset": ["./src/index.ts"]
+            "ng-d3-asset": ["./src/example.bootstrap.ts"]
         },
         module: {
             rules: [
