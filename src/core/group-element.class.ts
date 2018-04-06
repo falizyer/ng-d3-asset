@@ -1,47 +1,48 @@
-import {select, Selection} from "d3-selection";
+import {Selection} from "d3-selection";
 
-export abstract class GroupElement {
+export interface GroupElementSettings {
+}
 
-    private parentNode: Selection<any, any, any, any>;
-    private data: Array<number[][][]>;
-    private onMouseMove: () => void;
-    private onMouseLeave: () => void;
+/**
+ * @desc
+ * Base Group Element Class
+ */
+export abstract class GroupElement<T> {
 
-    public constructor(private $element: JQuery, settings) {
-        let svg: JQuery<HTMLElement> = this.$element.find("svg");
-        this.parentNode = select(svg[0]);
-        const {
-            onMouseMove = () => void 0,
-            onMouseLeave = () => void 0
-        } = settings;
-        this.onMouseMove = onMouseMove;
-        this.onMouseLeave = onMouseLeave;
-        this.parentNode
-            .on("mousemove", this.onMouseMove)
-            .on("mouseleave", this.onMouseLeave);
+    public constructor(
+        private parentNode: Selection<any, any, any, any>,
+        settings: GroupElementSettings) {
+
     }
 
-    public render(data: Array<number[][][]>): Selection<any, any, any, any> {
-        this.parentNode
-            .selectAll(this.getSelector())
-            .remove();
+    /**
+     * @desc
+     * Method for performing render
+     * @param {Array<T>} data
+     * @returns {Selection<any, T, any, T[]>}
+     */
+    public render(data: T[][]): Selection<any, T[], any, T[][]> {
+        let selection: Selection<any, any, any, any> = this.parentNode.selectAll(this.getGroupSelector())
+            .data<T[]>(data);
 
-        let selection = this.parentNode.selectAll(this.getSelector())
-            .data(this.data || []);
-
-        selection
-            .enter()
+        return selection.enter()
             .append("g")
-            .attr("class", (d, i) => this.getClassName(d, i));
-
-        selection
-            .exit()
-            .remove();
-
-        return selection;
+            .attr("class", (d: T[], i: number) => this.getGroupClass(d, i));
     }
 
-    public abstract getSelector(): string;
+    /**
+     * @desc
+     * Method for getting default selector
+     * @returns {string}
+     */
+    public abstract getGroupSelector(): string;
 
-    public abstract getClassName(d, i): string;
+    /**
+     * @desc
+     * Method for getting group node class name
+     * @param {T} d
+     * @param {number} i
+     * @returns {string}
+     */
+    public abstract getGroupClass(d: T[], i: number): string;
 }
