@@ -5,6 +5,8 @@
     <title>Example</title>
 </head>
 <body>
-<ng-d3-line-chart></ng-d3-line-chart>
+<ng-d3-line-chart class="line-chart"
+                  metadata='<%= htmlWebpackPlugin.options.chart_metadata %>'
+                  data='<%= htmlWebpackPlugin.options.chart_data %>'></ng-d3-line-chart>
 </body>
 </html>

@@ -8,7 +8,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "emitBOM": true,
+    "charset": "utf8"
   },
   "exclude": [
     "node_modules"
