@@ -51,7 +51,7 @@ export class ChartImage<T> extends GroupElement<T[]> {
             .y((d: T, i: number) => this.y(d, i));
     }
 
-    public init(settings: ChartImageSettings<T>, isRenderFlag: boolean = false): void {
+    public init(settings: ChartImageSettings<T> = {}, isRenderFlag: boolean = false): void {
         const {
             selector = this.selector,
             dataType = this.dataType,

@@ -1,3 +1,39 @@
+@y-axis-width: 35px;
+@x-axis-height: 40px;
+
 ng-d3-line-chart {
   display: flex;
+
+  .line-chart-wrap {
+    display: flex;
+    flex-direction: column;
+
+    .image-container svg {
+      display: flex;
+    }
+
+    .horizontal-container {
+      display: flex;
+      flex-direction: row;
+
+      .image-container.y-axis svg {
+        width: @y-axis-width;
+      }
+    }
+
+    .image-container.x-axis svg {
+      height: @x-axis-height;
+      margin-left: @y-axis-width;
+    }
+
+    .line-element {
+      fill: none;
+      stroke: black;
+    }
+
+    .area-element {
+      fill: rgba(0, 0, 0, .7);
+      stroke: black;
+    }
+  }
 }

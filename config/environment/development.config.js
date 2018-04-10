@@ -30,12 +30,14 @@ const config = {
                 template: "./src/example.ejs",
                 filename: "index.html",
                 chart_metadata: JSON.stringify({
-                    selector: ["chart-image"],
-                    alias: ["line-element", "area-element"],
-                    dataType: [0, 1]
+                    chartImage: {
+                        selector: ["chart-image"],
+                        alias: ["line-element", "area-element"],
+                        dataType: [0, 1]
+                    }
                 }),
                 chart_data: JSON.stringify([
-                    [[[0, 0], [20, 30], [40, 0]]],
+                    [[[0, 0], [20, 30], [100, 0]]],
                     [[[0, 0], [20, 30], [40, 0]]]
                 ])
             })
