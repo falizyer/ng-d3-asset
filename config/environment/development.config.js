@@ -29,6 +29,7 @@ const config = {
             new HtmlWebpackPlugin({
                 template: "./src/example.ejs",
                 filename: "index.html",
+                hash: true,
                 chart_metadata: JSON.stringify({
                     chartImage: {
                         selector: ["chart-image"],
@@ -38,7 +39,7 @@ const config = {
                 }),
                 chart_data: JSON.stringify([
                     [[[0, 0], [20, 30], [100, 0]]],
-                    [[[0, 0], [20, 30], [40, 0]]]
+                    [[[0, 0], [20, 30], [40, 10], [60, 10]]]
                 ])
             })
         ]

@@ -1,29 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
 @y-axis-width: 35px;
-@x-axis-height: 40px;
+@x-axis-height: 20px;
 
 ng-d3-line-chart {
+  position: relative;
   display: flex;
+  width: 400px;
+  height: 300px;
 
   .line-chart-wrap {
+    position: relative;
     display: flex;
     flex-direction: column;
+    flex: 1 0;
 
-    .image-container svg {
-      display: flex;
+    .image-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+      svg {
+        display: flex;
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .horizontal-container {
       display: flex;
       flex-direction: row;
+      flex: 1 0;
+      z-index: 1;
 
       .image-container.y-axis svg {
-        width: @y-axis-width;
+        width: 100%;
+      }
+
+      .image-container.chart-image {
+        padding-left: @y-axis-width;
+        padding-bottom: @x-axis-height;
       }
     }
 
-    .image-container.x-axis svg {
-      height: @x-axis-height;
-      margin-left: @y-axis-width;
+    .image-container.x-axis {
+      z-index: 0;
+
+      svg {
+        padding-left: @y-axis-width;
+      }
     }
 
     .line-element {

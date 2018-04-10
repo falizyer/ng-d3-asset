@@ -14,6 +14,9 @@ export interface AxisImageSettings extends GroupElementSettings {
     selector?: string[];
     imageType?: AxisImageType;
     scale?: ScaleLinear<number, number>;
+    tickSizeInner?: number;
+    tickSizeOuter?: number;
+    tickPadding?: number;
 }
 
 export class AxisImage extends GroupElement<number> {
@@ -22,17 +25,26 @@ export class AxisImage extends GroupElement<number> {
     private imageType: AxisImageType;
     private axis: Axis<number>;
     private scale: ScaleLinear<number, number>;
+    private tickSizeInner: number;
+    private tickSizeOuter: number;
+    private tickPadding: number;
 
     public constructor(parentNode, settings: AxisImageSettings = {}) {
         super(parentNode, settings);
         const {
             selector = [],
             imageType = AxisImageType.LEFT,
-            scale = scaleLinear()
+            scale = scaleLinear(),
+            tickSizeInner = -400,
+            tickSizeOuter = 5,
+            tickPadding = 10
         } = settings;
         this.selector = selector;
         this.imageType = imageType;
         this.scale = scale;
+        this.tickSizeInner = tickSizeInner;
+        this.tickSizeOuter = tickSizeOuter;
+        this.tickPadding = tickPadding;
         switch (this.imageType) {
             case AxisImageType.TOP:
                 this.axis = axisTop<number>(this.scale);
@@ -49,6 +61,9 @@ export class AxisImage extends GroupElement<number> {
             default:
                 break;
         }
+        this.axis.tickSizeInner(this.tickSizeInner);
+        this.axis.tickSizeOuter(this.tickSizeOuter);
+        this.axis.tickPadding(this.tickPadding);
 
     }
 
@@ -60,12 +75,21 @@ export class AxisImage extends GroupElement<number> {
         const {
             selector = this.selector,
             imageType = this.imageType,
-            scale = this.scale
+            scale = this.scale,
+            tickSizeInner = this.tickSizeInner,
+            tickSizeOuter = this.tickSizeOuter,
+            tickPadding = this.tickPadding
         } = settings;
         this.selector = selector;
         this.imageType = imageType;
         this.scale = scale;
+        this.tickSizeInner = tickSizeInner;
+        this.tickSizeOuter = tickSizeOuter;
+        this.tickPadding = tickPadding;
         this.axis.scale(this.scale);
+        this.axis.tickSizeInner(this.tickSizeInner);
+        this.axis.tickSizeOuter(this.tickSizeOuter);
+        this.axis.tickPadding(this.tickPadding);
         isFlagRender === true && this.render(this.getData());
     }
 

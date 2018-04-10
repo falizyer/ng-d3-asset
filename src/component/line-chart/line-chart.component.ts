@@ -1,5 +1,4 @@
 import {ScaleLinear, scaleLinear} from "d3-scale";
-import {line, area} from "d3-shape";
 import {ChartImage, ChartImageSettings, ChartImageType} from "../../core/chart-image.class";
 import {select} from "d3-selection";
 import {AxisImage, AxisImageType} from "../../core/axis-image.class";
@@ -64,25 +63,25 @@ export class LineChartComponent {
         const xAxisContainer = this.$element[0].querySelector(".image-container.x-axis svg");
         const yAxisContainer = this.$element[0].querySelector(".image-container.y-axis svg");
         const {clientWidth, clientHeight} = imageContainer;
-        this.xScale.range([0, clientWidth - 30]);
-        this.yScale.range([0, clientHeight - 30]);
+        this.xScale.range([0, clientWidth - 10]);
+        this.yScale.range([0, clientHeight - 10]);
         this.chartImage = new ChartImage<[number, number]>(select(imageContainer), {
             selector: ["chart-image"],
             x: (d: number[]) => this.xScale(d[0]),
-            y: (d: number[]) => this.xScale(d[1]),
-            margin: {top: 15, left: 15, bottom: 15, right: 15}
+            y: (d: number[]) => this.yScale(d[1]),
+            margin: {top: 10, left: 0, bottom: 0, right: 10}
         });
         this.xAxisImage = new AxisImage(select(xAxisContainer), {
             selector: ["axis-image", "x-axis"],
             imageType: AxisImageType.BOTTOM,
             scale: this.xScale,
-            margin: {top: 0, left: 15, bottom: 0, right: 15}
+            margin: {top: clientHeight, left: 0, bottom: 0, right: 10}
         });
         this.yAxisImage = new AxisImage(select(yAxisContainer), {
             selector: ["axis-image", "y-axis"],
             imageType: AxisImageType.LEFT,
             scale: this.yScale,
-            margin: {top: 15, left: 30, bottom: 15, right: 0}
+            margin: {top: 10, left: 35, bottom: 0, right: 0}
         });
     }
 
@@ -114,8 +113,8 @@ export class LineChartComponent {
         this.onPreRender(this, data);
         this.xScale.domain([0, 100]);
         this.yScale.domain([0, 100]);
+        this.xAxisImage.render([[0, 20, 50, 70, 100]]);
+        this.yAxisImage.render([[0, 20, 50, 70, 100]]);
         this.chartImage.render(data);
-        this.xAxisImage.render([[0, 100]]);
-        this.yAxisImage.render([[0, 100]]);
     }
 }

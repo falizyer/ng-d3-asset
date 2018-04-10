@@ -48,7 +48,7 @@ export class ChartImage<T> extends GroupElement<T[]> {
             .y((d: T, i: number) => this.y(d, i));
         this.area = area<T>()
             .x((d: T, i: number) => this.x(d, i))
-            .y((d: T, i: number) => this.y(d, i));
+            .y1((d: T, i: number) => this.y(d, i));
     }
 
     public init(settings: ChartImageSettings<T> = {}, isRenderFlag: boolean = false): void {
@@ -73,14 +73,20 @@ export class ChartImage<T> extends GroupElement<T[]> {
     public render(data: T[][][]): Selection<BaseType, T[][], BaseType, T[][][]> {
         const parent: Selection<BaseType, T[][], BaseType, T[][][]> = super.render(data);
         let selection: Selection<BaseType, T[], BaseType, T[][]> = parent.selectAll(this.getElementSelector())
-            .data<T[]>((d: T[][]) => d);
+            .data<T[]>((d: T[][], i: number) => {
+                d.forEach((datum: T[]) => {
+                    datum["DataNumber"] = i;
+                });
+                return d;
+            });
 
         selection.enter()
             .append("path")
             .attr("class", (d: T[], i: number) => this.getElementClass(d, i))
             .attr("d", (d: T[], i: number) => {
+                console.log(d);
                 let processor: Line<T> | Area<T>;
-                switch (i) {
+                switch (this.dataType[d["DataNumber"]]) {
                     case ChartImageType.LINE:
                         processor = this.line;
                         break;
@@ -88,7 +94,6 @@ export class ChartImage<T> extends GroupElement<T[]> {
                         processor = this.area;
                         break;
                     default:
-                        processor = this.line;
                         break;
                 }
                 return processor(d);
