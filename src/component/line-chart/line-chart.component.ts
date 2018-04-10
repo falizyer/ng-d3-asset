@@ -51,11 +51,13 @@ export class LineChartComponent {
     private xScale: ScaleLinear<number, number>;
     private yScale: ScaleLinear<number, number>;
     private onPreRender: ($ctrl: LineChartComponent, data) => any;
+    private onPostRender: ($ctrl: LineChartComponent, data) => any;
 
     public constructor(private $element: JQuery) {
         this.xScale = scaleLinear();
         this.yScale = scaleLinear();
         this.onPreRender = () => void 0;
+        this.onPostRender = () => void 0;
     }
 
     public init() {
@@ -113,8 +115,9 @@ export class LineChartComponent {
         this.onPreRender(this, data);
         this.xScale.domain([0, 100]);
         this.yScale.domain([0, 100]);
-        this.xAxisImage.render([[0, 20, 50, 70, 100]]);
-        this.yAxisImage.render([[0, 20, 50, 70, 100]]);
+        this.xAxisImage.render([[0, 10, 20, 35, 50, 70, 85, 100]]);
+        this.yAxisImage.render([[0, 10, 20, 35, 50, 70, 85, 100]]);
         this.chartImage.render(data);
+        this.onPostRender(this, data);
     }
 }
